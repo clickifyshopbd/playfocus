@@ -5,12 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PlayFocus - Secure Video Player</title>
     
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = { darkMode: 'class', }
@@ -25,33 +23,34 @@
             cursor: pointer; width: 16px; height: 16px;
             border-radius: 50%; background: #10b981;
         }
+        #volume-slider::-webkit-slider-thumb {
+            width: 12px; height: 12px;
+        }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-gray-100 min-h-screen flex flex-col justify-between overflow-x-hidden transition-colors duration-200">
 
     <header id="site-header" class="bg-white dark:bg-gray-800 p-4 shadow-md border-b border-gray-200 dark:border-gray-700 relative flex justify-between items-center px-6">
-        <div class="w-20"></div>
+        <div class="w-32"></div>
         <h1 data-i18n="title" class="text-2xl font-bold text-emerald-500 tracking-wide text-center flex-grow">🎯 PlayFocus</h1>
-        <div class="flex items-center space-x-4 w-20 justify-end">
-            <button id="btn-lang" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition font-bold text-sm cursor-pointer" title="Switch Language">🌐 EN</button>
+        <div class="flex items-center space-x-2 w-32 justify-end">
+            <button id="btn-decoder-open" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition text-lg cursor-pointer" title="Decode Link">🔍</button>
+            <button id="btn-lang" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition font-bold text-sm cursor-pointer whitespace-nowrap flex items-center justify-center" title="Switch Language">🌐 EN</button>
             <button id="btn-theme" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition text-lg cursor-pointer" title="Toggle Theme">🌙</button>
         </div>
     </header>
 
     <main class="flex-grow flex items-center justify-center p-4">
         
-        <!-- GENERATOR VIEW -->
         <div id="generator-view" class="w-full max-w-lg bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 hidden space-y-4">
             <h2 data-i18n="heading" class="text-xl font-semibold text-center text-gray-800 dark:text-gray-200">নতুন লিংক তৈরি করুন</h2>
             
             <div class="space-y-4">
                 <div>
-                    <!-- Updated Label text to include Shorts -->
                     <label data-i18n="labelUrl" class="block text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">YouTube, Shorts বা TikTok লিংক</label>
-                    <input type="text" id="yt-url" placeholder="YouTube, Shorts অথবা TikTok Link পেস্ট করুন..." class="w-full p-3 rounded-lg bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white focus:outline-none focus:border-emerald-500 transition-colors">
+                    <input type="text" id="yt-url" data-i18n="placeholderUrl" placeholder="YouTube, Shorts অথবা TikTok Link পেস্ট করুন..." class="w-full p-3 rounded-lg bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white focus:outline-none focus:border-emerald-500 transition-colors">
                 </div>
 
-                <!-- Preview Section for YouTube -->
                 <div id="preview-section" class="hidden space-y-2 mt-4 bg-gray-50 dark:bg-gray-700/30 p-3 rounded-xl border border-gray-200 dark:border-gray-600">
                     <p data-i18n="previewTitle" class="text-sm font-semibold text-gray-600 dark:text-gray-300 text-center">ভিডিও প্রিভিউ ও টাইম সেট</p>
                     <div class="relative w-full aspect-video bg-black rounded-lg overflow-hidden shadow-inner">
@@ -67,14 +66,13 @@
                     </div>
                 </div>
                 
-                <!-- Time Inputs -->
                 <div id="time-settings-group" class="grid grid-cols-2 gap-4 transition-all duration-300">
                     <div>
-                        <label data-i18n="labelStart" class="block text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">শুরুর সময় (সেকেন্ডে)</label>
+                        <label data-i18n="labelStart" class="block text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">শুরুর সময় (সেকেন্ডে)</label>
                         <input type="number" id="start-time" value="0" min="0" class="w-full p-3 rounded-lg bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white focus:outline-none focus:border-emerald-500">
                     </div>
                     <div>
-                        <label data-i18n="labelEnd" class="block text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">শেষের সময় (সেকেন্ডে)</label>
+                        <label data-i18n="labelEnd" class="block text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">শেষের সময় (সেকেন্ডে)</label>
                         <input type="number" id="end-time" value="60" min="1" class="w-full p-3 rounded-lg bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white focus:outline-none focus:border-emerald-500">
                     </div>
                 </div>
@@ -90,7 +88,6 @@
                 </div>
             </div>
 
-            <!-- COLLAPSIBLE WIKI -->
             <div class="mt-4 border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden bg-gray-50 dark:bg-gray-700/30">
                 <button id="wiki-toggle" class="w-full flex justify-between items-center p-3 font-semibold text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700/50 transition cursor-pointer">
                     <span data-i18n="wikiTitle">📖 এটি কিভাবে কাজ করে? (Wiki)</span>
@@ -99,23 +96,22 @@
                 <div id="wiki-content" class="p-4 border-t border-gray-200 dark:border-gray-700 text-sm space-y-3 hidden bg-white dark:bg-gray-800/40 text-gray-600 dark:text-gray-300">
                     <p id="wiki-intro-text" data-i18n="wikiIntro" class="text-emerald-500 font-bold border-b border-gray-100 dark:border-gray-700 pb-2">অনেক সময় আমরা একটি ভিডিওর নির্দিষ্ট অংশ আমাদের ফ্রেন্ডস, ফেমিলি অথবা সোশ্যাল মিডিয়ার ভিজিটরদের দেখাতে চাই। একই সাথে এটাও চাই না যে তারা ভিডিওর অপ্রয়োজনীয় অংশ দেখে সময় নষ্ট করুক। মূলত এই উদ্দেশ্যেই PlayFocus তৈরি করা হয়েছে।</p>
                     <p data-i18n="wikiStep1">১. আপনার কাঙ্ক্ষিত ইউটিউব, শর্টস বা টিকটক ভিডিওর লিংকটি প্রথম বক্সে পেস্ট করুন।</p>
-                    <p data-i18n="wikiStep2">২. ইউটিউব ভিডিওর ক্ষেত্রে কত সেকেন্ড থেকে শুরু এবং কত সেকেন্ডে শেষ হবে তা নির্ধারণ করুন (ম্যানুয়ালি অথবা প্রিভিউ প্লেয়ার ব্যবহার করে)।</p>
-                    <p data-i18n="wikiStep3">৩. 'লিংক তৈরি করুন' বাটনে ক্লিক করলে ডেডিকেটেড লিংকটি কপি হবে এবং স্বয়ংক্রিয়ভাবে নতুন ট্যাবে ওপেন হবে।</p>
+                    <p data-i18n="wikiStep2">২. ইউটিউব ভিডিওর ক্ষেত্রে কত সেকেন্ড থেকে শুরু এবং কত সেকেন্ডে শেষ হবে তা নির্ধারণ করুন (ম্যানুয়ালি অথবা প্রিভিউ প্লেয়ার ব্যবহার করে)।</p>
+                    <p data-i18n="wikiStep3">৩. 'লিংক তৈরি করুন' বাটনে ক্লিক করলে ডেডিকেটেড লিংকটি কপি হবে এবং স্বয়ংক্রিয়ভাবে নতুন ট্যাবে ওপেন হবে।</p>
                 </div>
             </div>
         </div>
 
-        <!-- PLAYER VIEW -->
         <div id="player-view" class="fixed inset-0 w-screen h-screen bg-black hidden z-50 flex flex-col justify-between select-none group">
             
             <button id="btn-fullscreen" class="absolute top-6 right-6 z-[60] bg-black/60 hover:bg-black/90 text-white p-3 rounded-xl transition-opacity duration-500 opacity-100 flex items-center justify-center cursor-pointer border border-gray-700 shadow-lg" title="Toggle Fullscreen">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" /></svg>
             </button>
 
-            <div class="relative flex-grow w-full h-full overflow-hidden flex items-center justify-center">
+            <div class="relative flex-grow w-full h-full overflow-hidden flex items-center justify-center bg-black">
                 <div id="video-overlay" class="video-overlay"></div>
                 <div id="yt-player" class="w-full h-full pointer-events-none hidden"></div>
-                <div id="tt-player-container" class="w-full h-full hidden z-30 flex items-center justify-center bg-black"></div>
+                <div id="tt-player-container" class="w-full h-full hidden z-30 flex items-center justify-center absolute inset-0"></div>
             </div>
             
             <div id="controls-bar" class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/95 via-black/70 to-transparent p-6 z-40 space-y-4 transition-opacity duration-500 opacity-100">
@@ -126,6 +122,9 @@
                         <button id="btn-mute" class="bg-gray-800/90 hover:bg-gray-700 text-white px-4 py-2 rounded-xl font-bold text-sm cursor-pointer border border-gray-700 transition flex items-center space-x-2">
                             <span id="mute-icon">🔊</span> <span id="mute-text" data-i18n="mute">Mute</span>
                         </button>
+                        <div class="group/volume relative flex items-center">
+                            <input type="range" id="volume-slider" min="0" max="100" value="100" class="w-0 opacity-0 group-hover/volume:w-20 group-hover/volume:opacity-100 md:w-20 md:opacity-100 transition-all duration-300 h-1.5 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-emerald-500 focus:outline-none">
+                        </div>
                     </div>
                     <div id="time-display" class="text-sm font-mono text-gray-300 font-medium">00:00 / 00:00</div>
                 </div>
@@ -138,11 +137,27 @@
         Developed by <a href="https://linktr.ee/Rahul24Index" target="_blank" class="text-emerald-500 hover:underline font-semibold">Rahul24Index</a> ❤️
     </footer>
 
-    <div id="toast" class="fixed bottom-5 right-5 bg-emerald-500 text-white dark:text-gray-900 font-bold px-5 py-3 rounded-xl shadow-2xl transform translate-y-20 opacity-0 transition-all duration-300 z-50">
-        <span id="toast-msg">✅ লিংকটি কপি হয়েছে!</span>
+    <div id="decoder-modal" class="fixed inset-0 bg-black/70 hidden z-[100] flex items-center justify-center p-4">
+        <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 w-full max-w-md shadow-2xl border border-gray-200 dark:border-gray-700 relative">
+            <button id="btn-decoder-close" class="absolute top-4 right-4 text-gray-500 hover:text-gray-800 dark:hover:text-gray-200 text-2xl leading-none font-bold cursor-pointer">&times;</button>
+            <h3 data-i18n="decodeTitle" class="text-xl font-bold text-gray-800 dark:text-gray-200 mb-4 text-center">লিংক ডিকোড করুন</h3>
+            <label data-i18n="decodeLabel" class="block text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">PlayFocus লিংক পেস্ট করুন</label>
+            <input type="text" id="decoder-input" data-i18n="placeholderDecode" placeholder="আপনার এনকোডেড লিংক এখানে পেস্ট করুন..." class="w-full p-3 rounded-lg bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white focus:outline-none focus:border-emerald-500 mb-4">
+            
+            <div id="decode-result-box" class="mt-4">
+                <p data-i18n="decodeOriginal" class="text-xs text-emerald-500 font-semibold mb-1">অরিজিনাল ভিডিও লিংক:</p>
+                <div class="flex items-center space-x-2">
+                    <input type="text" id="decoded-link" readonly data-i18n="placeholderOriginal" placeholder="অরিজিনাল ভিডিও লিংক এখানে দেখাবে..." class="w-full p-2 text-sm rounded bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300">
+                    <button id="btn-decode-copy" class="bg-emerald-500 hover:bg-emerald-600 text-white dark:text-gray-900 px-4 py-2 text-sm rounded font-bold transition cursor-pointer whitespace-nowrap">Copy</button>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <!-- YOUTUBE IFRAME PLAYER API -->
+    <div id="toast" class="fixed bottom-5 right-5 bg-emerald-500 text-white dark:text-gray-900 font-bold px-5 py-3 rounded-xl shadow-2xl transform translate-y-20 opacity-0 transition-all duration-300 z-50">
+        <span id="toast-msg">✅ লিংকটি কপি হয়েছে!</span>
+    </div>
+
     <script src="https://www.youtube.com/iframe_api"></script>
 
     <script>
@@ -156,17 +171,22 @@
         const translations = {
             bn: {
                 title: "🎯 PlayFocus", heading: "নতুন লিংক তৈরি করুন", labelUrl: "YouTube, Shorts বা TikTok লিংক",
-                labelStart: "শুরুর সময় (সেকেন্ডে)", labelEnd: "শেষের সময় (সেকেন্ডে)", btnGenerate: "লিংক তৈরি করুন",
+                placeholderUrl: "YouTube, Shorts অথবা TikTok Link পেস্ট করুন...",
+                labelStart: "শুরুর সময় (সেকেন্ডে)", labelEnd: "শেষের সময় (সেকেন্ডে)", btnGenerate: "লিংক তৈরি করুন",
                 dedicatedLink: "আপনার ডেডিকেটেড লিংক:", btnCopy: "Copy & Open", wikiTitle: "📖 এটি কিভাবে কাজ করে? (Wiki)",
                 wikiIntro: "অনেক সময় আমরা একটি ভিডিওর নির্দিষ্ট অংশ আমাদের ফ্রেন্ডস, ফেমিলি অথবা সোশ্যাল মিডিয়ার ভিজিটরদের দেখাতে চাই। একই সাথে এটাও চাই না যে তারা ভিডিওর অপ্রয়োজনীয় অংশ দেখে সময় নষ্ট করুক। মূলত এই উদ্দেশ্যেই PlayFocus তৈরি করা হয়েছে।",
                 wikiStep1: "১. আপনার কাঙ্ক্ষিত ইউটিউব, শর্টস বা টিকটক ভিডিওর লিংকটি প্রথম বক্সে পেস্ট করুন।",
-                wikiStep2: "২. ইউটিউব ভিডিওর ক্ষেত্রে কত সেকেন্ড থেকে শুরু এবং কত সেকেন্ডে শেষ হবে তা নির্ধারণ করুন (ম্যানুয়ালি অথবা প্রিভিউ প্লেয়ার ব্যবহার করে)।",
-                wikiStep3: "৩. 'লিংক তৈরি করুন' বাটনে ক্লিক করলে ডেডিকেটেড লিংকটি কপি হবে এবং স্বয়ংক্রিয়ভাবে নতুন ট্যাবে ওপেন হবে।",
-                toast: "✅ লিংকটি কপি হয়েছে এবং নতুন ট্যাবে ওপেন হচ্ছে!", mute: "Mute", unmute: "Unmute", play: "Play", pause: "Pause",
-                previewTitle: "ভিডিও প্রিভিউ ও টাইম সেট", setStart: "শুরু সেট করুন", setEnd: "শেষ সেট করুন"
+                wikiStep2: "২. ইউটিউব ভিডিওর ক্ষেত্রে কত সেকেন্ড থেকে শুরু এবং কত সেকেন্ডে শেষ হবে তা নির্ধারণ করুন (ম্যানুয়ালি অথবা প্রিভিউ প্লেয়ার ব্যবহার করে)।",
+                wikiStep3: "৩. 'লিংক তৈরি করুন' বাটনে ক্লিক করলে ডেডিকেটেড লিংকটি কপি হবে এবং স্বয়ংক্রিয়ভাবে নতুন ট্যাবে ওপেন হবে।",
+                toast: "✅ লিংকটি কপি হয়েছে এবং নতুন ট্যাবে ওপেন হচ্ছে!", mute: "Mute", unmute: "Unmute", play: "Play", pause: "Pause",
+                previewTitle: "ভিডিও প্রিভিউ ও টাইম সেট", setStart: "শুরু সেট করুন", setEnd: "শেষ সেট করুন",
+                decodeTitle: "লিংক ডিকোড করুন", decodeLabel: "PlayFocus এনকোডেড লিংক পেস্ট করুন", decodeOriginal: "অরিজিনাল ভিডিও লিংক:",
+                placeholderDecode: "আপনার এনকোডেড লিংক এখানে পেস্ট করুন...", placeholderOriginal: "অরিজিনাল ভিডিও লিংক এখানে দেখাবে...",
+                toastDecode: "✅ অরিজিনাল লিংক কপি হয়েছে!"
             },
             en: {
                 title: "🎯 PlayFocus", heading: "Create New Link", labelUrl: "YouTube, Shorts or TikTok Link",
+                placeholderUrl: "Paste YouTube, Shorts or TikTok Link...",
                 labelStart: "Start Time (Seconds)", labelEnd: "End Time (Seconds)", btnGenerate: "Generate Link",
                 dedicatedLink: "Your Dedicated Link:", btnCopy: "Copy & Open", wikiTitle: "📖 How It Works? (Wiki)",
                 wikiIntro: "Often we want to show a specific part of a video to our friends or visitors. At the same time, we don't want them to waste time watching unnecessary parts. PlayFocus is built for this exact purpose.",
@@ -174,11 +194,25 @@
                 wikiStep2: "2. For YouTube, set the start and end boundaries (manually or by using the visual preview player).",
                 wikiStep3: "3. Click 'Generate Link' to copy the dedicated URL.",
                 toast: "✅ Link copied and opening in a new tab!", mute: "Mute", unmute: "Unmute", play: "Play", pause: "Pause",
-                previewTitle: "Video Preview & Time Set", setStart: "Set Start", setEnd: "Set End"
+                previewTitle: "Video Preview & Time Set", setStart: "Set Start", setEnd: "Set End",
+                decodeTitle: "Decode Link", decodeLabel: "Paste PlayFocus Encoded Link", decodeOriginal: "Original Video Link:",
+                placeholderDecode: "Paste your encoded URL here...", placeholderOriginal: "Original link will appear here...",
+                toastDecode: "✅ Original link copied!"
             }
         };
 
         document.documentElement.classList.add('dark');
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-msg').innerText = msg;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+            setTimeout(() => {
+                toast.classList.remove('translate-y-0', 'opacity-100');
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        }
 
         document.getElementById('btn-lang').addEventListener('click', () => {
             currentLang = currentLang === 'bn' ? 'en' : 'bn';
@@ -189,11 +223,20 @@
         function updateLanguageUI() {
             document.querySelectorAll('[data-i18n]').forEach(el => {
                 const key = el.getAttribute('data-i18n');
-                if (translations[currentLang][key]) { el.innerHTML = translations[currentLang][key]; }
+                if (translations[currentLang][key]) { 
+                    if (el.tagName.toLowerCase() === 'input' && el.hasAttribute('placeholder')) {
+                        el.placeholder = translations[currentLang][key];
+                    } else {
+                        el.innerHTML = translations[currentLang][key]; 
+                    }
+                }
             });
             if (player && videoType === 'yt') {
                 const state = player.getPlayerState();
                 document.getElementById('btn-play-pause').innerText = state == YT.PlayerState.PLAYING ? "Pause" : "Play";
+            }
+            if(player && videoType === 'yt') {
+                document.getElementById('mute-text').innerText = player.isMuted() ? translations[currentLang].unmute : translations[currentLang].mute;
             }
         }
 
@@ -201,6 +244,43 @@
             currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
             document.getElementById('btn-theme').innerText = currentTheme === 'dark' ? '🌙' : '☀️';
             document.documentElement.classList.toggle('dark', currentTheme === 'dark');
+        });
+
+        const decoderModal = document.getElementById('decoder-modal');
+        document.getElementById('btn-decoder-open').addEventListener('click', () => { decoderModal.classList.remove('hidden'); });
+        document.getElementById('btn-decoder-close').addEventListener('click', () => { decoderModal.classList.add('hidden'); });
+        
+        document.getElementById('decoder-input').addEventListener('input', (e) => {
+            const url = e.target.value;
+            const match = url.match(/[?&]video=([^&]+)/);
+            const decodedInput = document.getElementById('decoded-link');
+            
+            if(match) {
+                try {
+                    const decoded = JSON.parse(atob(match[1]));
+                    let originalUrl = "";
+                    if(decoded.t === 'yt') {
+                        originalUrl = `https://www.youtube.com/watch?v=${decoded.v}`;
+                    } else if(decoded.t === 'tt') {
+                        originalUrl = `https://www.tiktok.com/video/${decoded.v}`;
+                    }
+                    if(originalUrl) {
+                        decodedInput.value = originalUrl;
+                    } else {
+                        decodedInput.value = "";
+                    }
+                } catch(err) { decodedInput.value = ""; }
+            } else { decodedInput.value = ""; }
+        });
+
+        document.getElementById('btn-decode-copy').addEventListener('click', () => {
+            const link = document.getElementById('decoded-link').value;
+            if(link) {
+                navigator.clipboard.writeText(link).then(() => {
+                    showToast(translations[currentLang].toastDecode);
+                    window.open(link, '_blank');
+                });
+            }
         });
 
         document.getElementById('wiki-toggle').addEventListener('click', () => {
@@ -218,19 +298,13 @@
         });
 
         function parseVideoUrl(url) {
-            // 1. Check for YouTube Shorts
             const shortsMatch = url.match(/shorts\/([a-zA-Z0-9_-]+)/);
             if (shortsMatch) { return { type: 'yt', id: shortsMatch[1] }; }
-
-            // 2. Check for Standard YouTube Video
             const ytRegExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
             const ytMatch = url.match(ytRegExp);
             if (ytMatch && ytMatch[2].length === 11) { return { type: 'yt', id: ytMatch[2] }; }
-            
-            // 3. Check for TikTok Video
             const ttMatch = url.match(/\/video\/(\d+)/) || url.match(/\/v\/(\d+)/);
             if (ttMatch) { return { type: 'tt', id: ttMatch[1] }; }
-            
             return null;
         }
 
@@ -238,7 +312,6 @@
             const url = e.target.value;
             const timeGroup = document.getElementById('time-settings-group');
             const previewSection = document.getElementById('preview-section');
-            
             const parsed = parseVideoUrl(url);
 
             if (parsed && parsed.type === 'tt') {
@@ -260,9 +333,7 @@
                                 }
                             }
                         });
-                    } else {
-                        previewPlayer.loadVideoById(parsed.id);
-                    }
+                    } else { previewPlayer.loadVideoById(parsed.id); }
                 }
             } else {
                 timeGroup.classList.remove('opacity-40', 'pointer-events-none');
@@ -285,14 +356,14 @@
         });
 
         const urlParams = new URLSearchParams(window.location.search);
-        const lessonData = urlParams.get('lesson');
+        const encodedVideoData = urlParams.get('video');
 
-        if (lessonData) {
+        if (encodedVideoData) {
             document.getElementById('player-view').classList.remove('hidden');
             document.getElementById('site-header').classList.add('hidden');
             document.getElementById('site-footer').classList.add('hidden');
             try {
-                const decoded = JSON.parse(atob(lessonData));
+                const decoded = JSON.parse(atob(encodedVideoData));
                 videoType = decoded.t || 'yt';
                 videoId = decoded.v;
                 startTime = parseInt(decoded.s) || 0;
@@ -304,7 +375,8 @@
                     document.getElementById('btn-fullscreen').classList.add('hidden');
                     const ttContainer = document.getElementById('tt-player-container');
                     ttContainer.classList.remove('hidden');
-                    ttContainer.innerHTML = `<iframe src="https://www.tiktok.com/embed/v2/${videoId}" class="w-full h-full border-0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
+                    // Updated TikTok iframe for better scaling and autoplay
+                    ttContainer.innerHTML = `<iframe src="https://www.tiktok.com/embed/v2/${videoId}?autoplay=1" class="w-full h-full border-0 absolute inset-0" allow="autoplay; fullscreen; encrypted-media" allowfullscreen></iframe>`;
                 } else {
                     document.getElementById('yt-player').classList.remove('hidden');
                 }
@@ -319,13 +391,13 @@
             const endInput = document.getElementById('end-time').value;
             
             const parsed = parseVideoUrl(urlInput);
-            if (!parsed) { alert("দয়া করে একটি সঠিক ইউটিউব, শর্টস অথবা টিকটক ভিডিও লিংক দিন!"); return; }
+            if (!parsed) { alert("দয়া করে একটি সঠিক ইউটিউব, শর্টস অথবা টিকটক ভিডিও লিংক দিন!"); return; }
 
             if(previewPlayer && previewPlayer.stopVideo) previewPlayer.stopVideo();
 
             const dataObj = { t: parsed.type, v: parsed.id, s: startInput, e: endInput };
             const encodedData = btoa(JSON.stringify(dataObj));
-            const finalLink = `${window.location.origin}${window.location.pathname}?lesson=${encodedData}`;
+            const finalLink = `${window.location.origin}${window.location.pathname}?video=${encodedData}`;
             
             document.getElementById('generated-link').value = finalLink;
             document.getElementById('result-box').classList.remove('hidden');
@@ -334,15 +406,8 @@
         document.getElementById('btn-copy').addEventListener('click', () => {
             const linkInput = document.getElementById('generated-link');
             navigator.clipboard.writeText(linkInput.value).then(() => {
-                const toast = document.getElementById('toast');
-                document.getElementById('toast-msg').innerText = translations[currentLang].toast;
-                toast.classList.remove('translate-y-20', 'opacity-0');
-                toast.classList.add('translate-y-0', 'opacity-100');
+                showToast(translations[currentLang].toast);
                 window.open(linkInput.value, '_blank');
-                setTimeout(() => {
-                    toast.classList.remove('translate-y-0', 'opacity-100');
-                    toast.classList.add('translate-y-20', 'opacity-0');
-                }, 3000);
             });
         });
 
@@ -371,11 +436,13 @@
         const slider = document.getElementById('progress-slider');
         const controlsBar = document.getElementById('controls-bar');
         const fsBtn = document.getElementById('btn-fullscreen');
+        const volumeSlider = document.getElementById('volume-slider');
 
         function onPlayerReady(event) {
             slider.max = endTime - startTime;
             player.seekTo(startTime);
             player.unMute(); 
+            player.setVolume(100);
             player.playVideo();
             updateTimeDisplay();
             resetControlsTimeout();
@@ -417,18 +484,47 @@
         document.getElementById('video-overlay').addEventListener('click', togglePlayPause);
         document.getElementById('btn-play-pause').addEventListener('click', (e) => { e.stopPropagation(); togglePlayPause(); });
 
+        function updateMuteUI(isMuted) {
+            const icon = document.getElementById('mute-icon');
+            const txt = document.getElementById('mute-text');
+            if (isMuted) {
+                icon.innerText = "🔇"; txt.innerText = translations[currentLang].unmute;
+                volumeSlider.value = 0;
+            } else {
+                icon.innerText = "🔊"; txt.innerText = translations[currentLang].mute;
+                if(player && player.getVolume() > 0) {
+                    volumeSlider.value = player.getVolume();
+                } else {
+                    volumeSlider.value = 100;
+                    if(player) player.setVolume(100);
+                }
+            }
+        }
+
         document.getElementById('btn-mute').addEventListener('click', (e) => {
             e.stopPropagation();
             if (!player || videoType !== 'yt') return;
-            const icon = document.getElementById('mute-icon');
-            const txt = document.getElementById('mute-text');
-            if (player.isMuted()) {
-                player.unMute(); icon.innerText = "🔊"; txt.innerText = translations[currentLang].mute;
-            } else {
-                player.mute(); icon.innerText = "🔇"; txt.innerText = translations[currentLang].unmute;
+            if (player.isMuted()) { player.unMute(); updateMuteUI(false); } 
+            else { player.mute(); updateMuteUI(true); }
+            resetControlsTimeout();
+        });
+
+        volumeSlider.addEventListener('input', (e) => {
+            e.stopPropagation();
+            if (!player || videoType !== 'yt') return;
+            const vol = parseInt(e.target.value);
+            player.setVolume(vol);
+            if (vol > 0 && player.isMuted()) {
+                player.unMute();
+                updateMuteUI(false);
+            } else if (vol === 0 && !player.isMuted()) {
+                player.mute();
+                updateMuteUI(true);
             }
             resetControlsTimeout();
         });
+        
+        volumeSlider.addEventListener('click', (e) => e.stopPropagation());
 
         slider.addEventListener('input', () => { isDragging = true; resetControlsTimeout(); });
         slider.addEventListener('change', () => {
