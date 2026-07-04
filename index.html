@@ -30,18 +30,31 @@
 </head>
 <body class="bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-gray-100 min-h-screen flex flex-col justify-between overflow-x-hidden transition-colors duration-200">
 
-    <header id="site-header" class="bg-white dark:bg-gray-800 p-4 shadow-md border-b border-gray-200 dark:border-gray-700 relative flex justify-between items-center px-6">
-        <div class="w-32"></div>
-        <h1 data-i18n="title" class="text-2xl font-bold text-emerald-500 tracking-wide text-center flex-grow">🎯 PlayFocus</h1>
-        <div class="flex items-center space-x-2 w-32 justify-end">
-            <button id="btn-decoder-open" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition text-lg cursor-pointer" title="Decode Link">🔍</button>
-            <button id="btn-lang" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition font-bold text-sm cursor-pointer whitespace-nowrap flex items-center justify-center" title="Switch Language">🌐 EN</button>
-            <button id="btn-theme" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition text-lg cursor-pointer" title="Toggle Theme">🌙</button>
+    <!-- Updated Header for Perfect Mobile & Desktop View -->
+    <header id="site-header" class="bg-white dark:bg-gray-800 p-3 sm:p-4 shadow-md border-b border-gray-200 dark:border-gray-700 flex items-center justify-between">
+        
+        <!-- Header Left: GitHub Icon -->
+        <div class="flex-1 flex justify-start">
+            <a href="https://github.com/Rahul24Now/playfocus/" target="_blank" class="text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition-colors flex items-center gap-2 font-medium text-sm" title="View Source on GitHub">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                <span class="hidden sm:inline">GitHub</span>
+            </a>
+        </div>
+        
+        <!-- Header Center: Title -->
+        <h1 data-i18n="title" class="text-xl sm:text-2xl font-bold text-emerald-500 tracking-wide text-center flex-none">🎯 PlayFocus</h1>
+        
+        <!-- Header Right: Controls -->
+        <div class="flex-1 flex items-center justify-end space-x-2 sm:space-x-3">
+            <button id="btn-decoder-open" class="p-1 sm:p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition text-base sm:text-lg cursor-pointer" title="Decode Link">🔍</button>
+            <button id="btn-lang" class="p-1 sm:p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition font-bold text-xs sm:text-sm cursor-pointer whitespace-nowrap flex items-center justify-center" title="Switch Language">🌐 EN</button>
+            <button id="btn-theme" class="p-1 sm:p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition text-base sm:text-lg cursor-pointer" title="Toggle Theme">🌙</button>
         </div>
     </header>
 
     <main class="flex-grow flex items-center justify-center p-4">
         
+        <!-- Generator View -->
         <div id="generator-view" class="w-full max-w-lg bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 hidden space-y-4">
             <h2 data-i18n="heading" class="text-xl font-semibold text-center text-gray-800 dark:text-gray-200">নতুন লিংক তৈরি করুন</h2>
             
@@ -102,6 +115,7 @@
             </div>
         </div>
 
+        <!-- Player View -->
         <div id="player-view" class="fixed inset-0 w-screen h-screen bg-black hidden z-50 flex flex-col justify-between select-none group">
             
             <button id="btn-fullscreen" class="absolute top-6 right-6 z-[60] bg-black/60 hover:bg-black/90 text-white p-3 rounded-xl transition-opacity duration-500 opacity-100 flex items-center justify-center cursor-pointer border border-gray-700 shadow-lg" title="Toggle Fullscreen">
@@ -134,10 +148,14 @@
 
     </main>
 
-    <footer id="site-footer" class="bg-white dark:bg-gray-800 p-3 text-center text-xs text-gray-500 border-t border-gray-200 dark:border-gray-700">
-        Developed by <a href="https://linktr.ee/Rahul24Index" target="_blank" class="text-emerald-500 hover:underline font-semibold">Rahul24Index</a> ❤️
+    <!-- Clean & Professional Footer -->
+    <footer id="site-footer" class="bg-white dark:bg-gray-800 py-4 text-center text-xs text-gray-500 border-t border-gray-200 dark:border-gray-700">
+        <div class="flex justify-center items-center">
+            <span>Developed by <a href="https://linktr.ee/Rahul24Index" target="_blank" class="text-emerald-500 hover:underline font-semibold text-sm ml-1">Rahul24Index</a> ❤️</span>
+        </div>
     </footer>
 
+    <!-- Decoder Modal -->
     <div id="decoder-modal" class="fixed inset-0 bg-black/70 hidden z-[100] flex items-center justify-center p-4">
         <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 w-full max-w-md shadow-2xl border border-gray-200 dark:border-gray-700 relative">
             <button id="btn-decoder-close" class="absolute top-4 right-4 text-gray-500 hover:text-gray-800 dark:hover:text-gray-200 text-2xl leading-none font-bold cursor-pointer">&times;</button>
@@ -159,8 +177,8 @@
         <span id="toast-msg">✅ লিংকটি কপি হয়েছে!</span>
     </div>
 
+    <!-- Script Section -->
     <script src="https://www.youtube.com/iframe_api"></script>
-
     <script>
         let player, previewPlayer, videoId, startTime, endTime, updateInterval, controlsTimeout;
         let videoType = 'yt';
@@ -366,26 +384,15 @@
             }
         });
 
-        // TIKTOK DYNAMIC SCALING FUNCTION
         function applyTikTokScale() {
             const container = document.getElementById('tt-scale-container');
             if(!container) return;
-            
             const wh = window.innerHeight;
             const ww = window.innerWidth;
-            
-            // Base mobile size that TikTok embeds perfectly into without white gaps
             const baseW = 325;
             const baseH = 720;
-            
-            // Calculate scale to fit 98% of the screen height
             let scale = (wh * 0.98) / baseH;
-            
-            // If the scaled width exceeds the screen width (for very narrow screens), adjust based on width instead
-            if (baseW * scale > (ww * 0.95)) {
-                scale = (ww * 0.95) / baseW;
-            }
-            
+            if (baseW * scale > (ww * 0.95)) { scale = (ww * 0.95) / baseW; }
             container.style.transform = `scale(${scale})`;
         }
 
@@ -411,7 +418,6 @@
                     iframeContainer.classList.remove('hidden');
                     
                     if (videoType === 'tt') {
-                        // NEW LOGIC: JS Calculated Zoom over a perfectly sized Mobile Virtual Container
                         iframeContainer.innerHTML = `
                             <div class="flex items-center justify-center w-full h-full bg-black overflow-hidden relative">
                                 <div id="tt-scale-container" style="width: 325px; height: 720px; transform-origin: center; transition: transform 0.1s ease-out; background: #000; border-radius: 12px; overflow: hidden; box-shadow: 0 0 30px rgba(0,0,0,0.8);">
@@ -424,8 +430,6 @@
                             </div>
                         `;
                         document.getElementById('btn-fullscreen').classList.add('hidden');
-                        
-                        // Apply scaling dynamically
                         setTimeout(applyTikTokScale, 50);
                         window.addEventListener('resize', applyTikTokScale);
 
@@ -612,7 +616,6 @@
             if(videoType !== 'yt') return;
             controlsBar.classList.remove('opacity-0', 'pointer-events-none');
             controlsBar.classList.add('opacity-100');
-            
             if(fsBtn) {
                 fsBtn.classList.remove('opacity-0', 'pointer-events-none');
                 fsBtn.classList.add('opacity-100');
@@ -624,7 +627,6 @@
             if (player && player.getPlayerState() == YT.PlayerState.PLAYING && !isDragging && videoType === 'yt') {
                 controlsBar.classList.remove('opacity-100');
                 controlsBar.classList.add('opacity-0', 'pointer-events-none');
-                
                 if(fsBtn) {
                     fsBtn.classList.remove('opacity-100');
                     fsBtn.classList.add('opacity-0', 'pointer-events-none');
